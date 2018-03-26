@@ -23,8 +23,7 @@ Jupyter Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 >>> import pdb
 >>> a="a string"
 >>> pdb.set_trace()
-
----Returns---
+Returns:
 > <stdin>(1)<module>()->None
 (Pdb) p a
 'a string'
@@ -55,6 +54,7 @@ Out[6]: 43
 # Plotting and Visualization
 - Always have ```%matplotlib inline``` to ensure that the plots are rendered inside the notebook
 - Use separate plotting functions instead of repeating ``plt.plot`` code to avoid code bloating. Using ``subplots`` is usually neater than using more ``plt.plots``
+
 ```python
 def show_img(im, figsize=None, ax=None, title=None):
     if not ax: fig,ax = plt.subplots(figsize=figsize)
