@@ -44,6 +44,7 @@ In [5]: # open foo.py in an editor and change some_function to return 43
 In [6]: some_function()
 Out[6]: 43
 ```
+- When using `print(out_var)` on a nested list or dictionary, consider doing `print(json.dumps(out_var)` instead. It will _pretty print_ the output string. 
 
 # Better Mindset
 - **IMPORTANT**: Frequently rewrite each cell logic into functions. These functions can be moved to separate ```.py``` files on regular intervals. Your notebook run should be mainly function calls. 
@@ -55,7 +56,7 @@ Out[6]: 43
 - Use ```Pathlib``` instead of ```os.path``` wherever possible for more readable code. Here is a [beginner friendly tutorial](https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f). If you just want to review, refer the [crisp tutorial](https://jefftriplett.com/2017/pathlib-is-wonderful/) or [official docs](https://docs.python.org/3/library/pathlib.html)
 
 # Plotting and Visualization
-- Always have ```%matplotlib inline``` to ensure that the plots are rendered inside the notebook
+- Always have ```[%matplotlib inline](http://ipython.readthedocs.io/en/stable/interactive/plotting.html)``` to ensure that the plots are rendered inside the notebook
 - Use separate plotting functions instead of repeating ``plt.plot`` code to avoid code bloating. Using ``subplots`` is usually neater than using more ``plt.plots``
 
 ```python
