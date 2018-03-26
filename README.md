@@ -5,7 +5,8 @@ Jupyter Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 ### Getting Started Right
 - Start your Jupyter server with ```supervisor``` or ```tmux``` instead of direct ```ssh``` or ```bash```. This works out to be more stable Jupyter server which doesn't die unexpectedly. It allows you to keep Jupyter logs for reference
 - Use a ssh client like MobaXterm [Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
-- Refer our [How to Tunnel](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) on how to tunnel to a remote Jupyter notebook
+- Refer our [How to Tunnel using SSH](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) (with illustrations) to tunnel to a remote Jupyter notebook
+
 # Debugging 
 - If you see an error, you can run [```%debug```](http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-debug) in a new cell to IPython Debugger. Standard keyboard shortcuts such as ```c``` for continue, ```n``` for next, ```q``` for quit apply
 - Use ``import pdb; pdb.set_trace()`` to set Python Debugger checkpoint, the same way you would in PyCharm: 
@@ -13,7 +14,9 @@ Jupyter Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 >>> import pdb
 >>> a="a string"
 >>> pdb.set_trace()
+```
 Returns:
+```
 > <stdin>(1)<module>()->None
 (Pdb) p a
 'a string'
