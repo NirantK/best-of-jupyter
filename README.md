@@ -6,16 +6,6 @@ Jupyter Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 - Start your Jupyter server with ```supervisor``` or ```tmux``` instead of direct ```ssh``` or ```bash```. This works out to be more stable Jupyter server which doesn't die unexpectedly. It allows you to keep Jupyter logs for reference
 - Use a ssh client like MobaXterm [Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
 - Refer our [How to Tunnel](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) on how to tunnel to a remote Jupyter notebook
-
-# Better Mindset
-- **IMPORTANT**: Frequently rewrite each cell logic into functions. These functions can be moved to separate ```.py``` files on regular intervals. Your notebook run should be mainly function calls. 
-    - This would prevent your notebook from becoming a giant pudding of several global variables
-- If particular cells take too long to run, add ``%%time`` cell magic as a warning + runtime logger
-- If you are on **Py3.6+**, please use f-strings! ```f"This is iteration: {iter_number}"```is much more readable than ```.format()``` syntax
-- Any code that is used in more than 3 notebooks should be moved to .py files (such as utils.py) and imported such as ```from xxx_imports import *```
-- Quite often, we frequently re-run same code cell. Instead, refactor that cell to a function and call that function repeatedly to prevent accidental edits
-- Use ```Pathlib``` instead of ```os.path``` wherever possible for more readable code. Here is a [beginner friendly tutorial](https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f). If you just want to review, refer the [crisp tutorial](https://jefftriplett.com/2017/pathlib-is-wonderful/) or [official docs](https://docs.python.org/3/library/pathlib.html)
-
 # Debugging 
 - If you see an error, you can run [```%debug```](http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-debug) in a new cell to IPython Debugger. Standard keyboard shortcuts such as ```c``` for continue, ```n``` for next, ```q``` for quit apply
 - Use ``import pdb; pdb.set_trace()`` to set Python Debugger checkpoint, the same way you would in PyCharm: 
@@ -29,6 +19,7 @@ Returns:
 'a string'
 (Pdb)
 ```
+
 Short Note on ```%debug``` vs ```pdb.set_trace()```: 
     - The easier debugging tool is probably %debug because you can zero down to the exact line where your code breaks compared to ``pdb`` where you might've to traverse line by line to figure out where you code breaks
 
@@ -50,6 +41,15 @@ In [5]: # open foo.py in an editor and change some_function to return 43
 In [6]: some_function()
 Out[6]: 43
 ```
+
+# Better Mindset
+- **IMPORTANT**: Frequently rewrite each cell logic into functions. These functions can be moved to separate ```.py``` files on regular intervals. Your notebook run should be mainly function calls. 
+    - This would prevent your notebook from becoming a giant pudding of several global variables
+- If particular cells take too long to run, add ``%%time`` cell magic as a warning + runtime logger
+- If you are on **Py3.6+**, please use f-strings! ```f"This is iteration: {iter_number}"```is much more readable than ```.format()``` syntax
+- Any code that is used in more than 3 notebooks should be moved to .py files (such as utils.py) and imported such as ```from xxx_imports import *```
+- Quite often, we frequently re-run same code cell. Instead, refactor that cell to a function and call that function repeatedly to prevent accidental edits
+- Use ```Pathlib``` instead of ```os.path``` wherever possible for more readable code. Here is a [beginner friendly tutorial](https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f). If you just want to review, refer the [crisp tutorial](https://jefftriplett.com/2017/pathlib-is-wonderful/) or [official docs](https://docs.python.org/3/library/pathlib.html)
 
 # Plotting and Visualization
 - Always have ```%matplotlib inline``` to ensure that the plots are rendered inside the notebook
