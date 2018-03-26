@@ -2,6 +2,11 @@
 Jupyter Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 ---
 
+### Getting Started Right
+- Start your Jupyter server with ```supervisor``` or ```tmux``` instead of direct ```ssh``` or ```bash```. This works out to be more stable Jupyter server which doesn't die unexpectedly. It allows you to keep Jupyter logs for reference
+- Use a ssh client like MobaXterm [Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
+- Refer our [How to Tunnel](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) on how to tunnel to a remote Jupyter notebook
+
 # Better Mindset
 - **IMPORTANT**: Frequently rewrite each cell logic into functions. These functions can be moved to separate ```.py``` files on regular intervals. Your notebook run should be mainly function calls. 
     - This would prevent your notebook from becoming a giant pudding of several global variables
