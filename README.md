@@ -106,13 +106,15 @@ draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each chara
     - Running `!pip install foo` (or `conda install bar`) will use the `pip` which is in the path for the `sh` shell which might be different from whatever `bash` shell environment you use
 - If you want to install a package while inside Jupyter and `!pip install foo` doesn't seem to do it, try:
 
-```
+```python
 import sys
 !{sys.executable} -m pip install foo  # sys.executable points to the python that is running in your kernel 
 ```
 - If your imports are failing, check your notebook kernel on the right top in gray
-- Press ```h``` to view keyboard shortcuts
+
+## Related Tips
 - Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
+- Press ```h``` to view keyboard shortcuts
 - The cell type can be changed to markdown and plain text too
     - Some people convert code cells to markdown if you want to execute them but don't want to comment either
 - Consider downloading a notebook as a Python file and then push to Gitlab for code review
