@@ -9,8 +9,9 @@ Making the best of Jupyter: Tips, Tricks, Best Practices with Sample Code for Pr
 - Refer our [How to Tunnel using SSH](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) (with illustrations) to tunnel to a remote Jupyter notebook
 
 # Debugging 
-- If you see an error, you can run [```%debug```](http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-debug) in a new cell to IPython Debugger. Standard keyboard shortcuts such as ```c``` for continue, ```n``` for next, ```q``` for quit apply
+- When you see an error, you can run [```%debug```](http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-debug) in a new cell to activate IPython Debugger. Standard keyboard shortcuts such as ```c``` for continue, ```n``` for next, ```q``` for quit apply
 - Use `from IPython.core.debugger import set_trace` to **I**Python debugger checkpoints, the same way you would for `pdb` in PyCharm
+
 
 ```python
 from IPython.core.debugger import set_trace
@@ -38,8 +39,7 @@ ipdb> q
 Exiting Debugger.
 ```
 
-*Preference Note:*
-    - I prefer `%debug` because you can zero down to the exact line where your code breaks compared to ``set_trace()`` where you might have to traverse line by line to figure out where you code breaks
+*Preference Note:* If I already have an exception, I prefer `%debug` because I can zero down to the exact line where code breaks compared to ``set_trace()`` where I have to traverse line by line
 
 - When editing imported code, use [```%load_ext autoreload; %autoreload 2 ```](https://ipython.org/ipython-doc/3/config/extensions/autoreload.html). The autoreload utility reloads modules automatically before entering the execution of code typed at the IPython prompt.
 
@@ -59,7 +59,7 @@ In [5]: # open foo.py in an editor and change some_function to return 43
 In [6]: some_function()
 Out[6]: 43
 ```
-- When using `print(out_var)` on a nested list or dictionary, consider doing `print(json.dumps(out_var)` instead. It will _pretty print_ the output string. 
+- When using `print(out_var)` on a nested list or dictionary, consider doing `print(json.dumps(out_var, indent=2))` instead. It will _pretty print_ the output string. 
 
 # Better Mindset
 - **IMPORTANT**: Frequently rewrite each cell logic into functions. These functions can be moved to separate ```.py``` files on regular intervals. Your notebook run should be mainly function calls. 
@@ -71,8 +71,8 @@ Out[6]: 43
 - Use ```Pathlib``` instead of ```os.path``` wherever possible for more readable code. Here is a [beginner friendly tutorial](https://medium.com/@ageitgey/python-3-quick-tip-the-easy-way-to-deal-with-file-paths-on-windows-mac-and-linux-11a072b58d5f). If you just want to review, refer the [crisp tutorial](https://jefftriplett.com/2017/pathlib-is-wonderful/) or [official docs](https://docs.python.org/3/library/pathlib.html)
 
 # Plotting and Visualization
-- Always have ```[%matplotlib inline](http://ipython.readthedocs.io/en/stable/interactive/plotting.html)``` to ensure that the plots are rendered inside the notebook
-- Use separate plotting functions instead of repeating ``plt.plot`` code to avoid code bloating. Using ``subplots`` is usually neater than using more ``plt.plots``
+- Always have [```%matplotlib inline```](http://ipython.readthedocs.io/en/stable/interactive/plotting.html) to ensure that the plots are rendered inside the notebook
+- Use separate plotting functions instead of repeating ``plt.plot`` code to avoid code bloating. Using ``subplots`` from Matplotlib OO API is usually neater than using more ``plt.plots``
 
 ```python
 def show_img(im, figsize=None, ax=None, title=None):
@@ -101,7 +101,7 @@ draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each chara
 ```
 
 # Programming Toys for Playtime
-- Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```pwd``` to check your current directory
+- _Cool Feature_: Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```pwd``` to check your current directory
 - Press ```h``` to view keyboard shortcuts
 - Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
 - The cell type can be changed to markdown and plain text too
