@@ -11,6 +11,7 @@ Making the best of Jupyter: Tips, Tricks, Best Practices with Sample Code for Pr
 # Debugging 
 - If you see an error, you can run [```%debug```](http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-debug) in a new cell to IPython Debugger. Standard keyboard shortcuts such as ```c``` for continue, ```n``` for next, ```q``` for quit apply
 - Use `from IPython.core.debugger import set_trace` to **I**Python debugger checkpoints, the same way you would for `pdb` in PyCharm
+
 ```python
 from IPython.core.debugger import set_trace
 
