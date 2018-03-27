@@ -100,8 +100,17 @@ ax = show_img(char_bg_mask, ax=axes.flat[1], title = 'Bkg_mask:\n'+str(char_bg_m
 draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each character
 ```
 
-# Programming Toys for Playtime
-- _Cool Feature_: Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```pwd``` to check your current directory
+# Programming Sugar
+- _Cool Feature_: Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```!pwd``` to check your current working directory
+- Running jupyter from an environment does NOT mean that the shell environment in `!` will have the same environment variables
+    - Running `!pip install foo` (or `conda install bar`) will use the `pip` which is in the path for the `sh` shell which might be different from whatever `bash` shell environment you use
+- If you want to install a package while inside Jupyter and `!pip install foo` doesn't seem to do it, try:
+
+```
+import sys
+!{sys.executable} -m pip install foo  # sys.executable points to the python that is running in your kernel 
+```
+- If your imports are failing, check your notebook kernel on the right top in gray
 - Press ```h``` to view keyboard shortcuts
 - Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
 - The cell type can be changed to markdown and plain text too
