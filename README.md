@@ -1,30 +1,44 @@
-# Best of Jupyter
-Jupyter Tips, Tricks, Best Practices with Sample Code for Productivity Boost
+# Making the Best of Jupyter
+Making the best of Jupyter: Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 ---
 
 ### Getting Started Right
-- Start your Jupyter server with ```supervisor``` or ```tmux``` instead of direct ```ssh``` or ```bash```. This works out to be more stable Jupyter server which doesn't die unexpectedly. It allows you to keep Jupyter logs for reference
-- Use a ssh client like MobaXterm [Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
+- Start your Jupyter server with ```supervisor``` or ```tmux``` instead of direct ```ssh``` or ```bash```. This works out to be more stable Jupyter server which doesn't die unexpectedly. Consider writing the buffer logs to a file rather than stdout
+    - This is specially useful when working inside _Docker_ using `docker attach` where you might not see a lot of logs
+- Consider using a ssh client like MobaXterm [Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
 - Refer our [How to Tunnel using SSH](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) (with illustrations) to tunnel to a remote Jupyter notebook
 
 # Debugging 
 - If you see an error, you can run [```%debug```](http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-debug) in a new cell to IPython Debugger. Standard keyboard shortcuts such as ```c``` for continue, ```n``` for next, ```q``` for quit apply
-- Use ``import pdb; pdb.set_trace()`` to set Python Debugger checkpoint, the same way you would in PyCharm: 
+- Use `from IPython.core.debugger import set_trace` to **I**Python debugger checkpoints, the same way you would for `pdb` in PyCharm
 ```python
->>> import pdb
->>> a="a string"
->>> pdb.set_trace()
-```
-Returns:
-```
-> <stdin>(1)<module>()->None
-(Pdb) p a
-'a string'
-(Pdb)
+from IPython.core.debugger import set_trace
+
+def foobar(n):
+    x = 1337
+    y = x + n
+    set_trace() #this one triggers the debugger
+    return y
+
+foobar(3)
 ```
 
-Short Note on ```%debug``` vs ```pdb.set_trace()```: 
-    - The easier debugging tool is probably %debug because you can zero down to the exact line where your code breaks compared to ``pdb`` where you might've to traverse line by line to figure out where you code breaks
+Returns:
+
+```python-traceback
+> <ipython-input-9-04f82805e71f>(7)fobar()
+      5     y = x + n
+      6     set_trace() #this one triggers the debugger
+----> 7     return y
+      8 
+      9 fobar(3)
+
+ipdb> q
+Exiting Debugger.
+```
+
+*Preference Note:*
+    - I prefer `%debug` because you can zero down to the exact line where your code breaks compared to ``set_trace()`` where you might have to traverse line by line to figure out where you code breaks
 
 - When editing imported code, use [```%load_ext autoreload; %autoreload 2 ```](https://ipython.org/ipython-doc/3/config/extensions/autoreload.html). The autoreload utility reloads modules automatically before entering the execution of code typed at the IPython prompt.
 
@@ -88,7 +102,7 @@ draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each chara
 # Programming Toys for Playtime
 - Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```pwd``` to check your current directory
 - Press ```h``` to view keyboard shortcuts
-- Consider using ```conda``` for instead of ```pip virtualenv``` specially if you are going to use scipy, cv2 or similar. 
+- Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
 - The cell type can be changed to markdown and plain text too
     - Some people convert code cells to markdown if you want to execute them but don't want to comment either
 - Consider downloading a notebook as a Python file and then push to Gitlab for code review
