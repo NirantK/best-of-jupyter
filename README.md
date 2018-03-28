@@ -137,7 +137,7 @@ import sys
     
 - Press ```h``` to view keyboard shortcuts
 - The cell type can be changed to markdown and plain text too
-    - Some people convert code cells to markdown if you want to execute them but don't want to comment either
+    - Some people convert code cells to markdown if you don't want to execute them but don't want to comment either
 - Consider downloading a notebook as a Python file and then push to Gitlab for code review
 
 ### Please don't overdo Cell Magic
