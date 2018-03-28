@@ -5,7 +5,7 @@ Making the best of Jupyter: Tips, Tricks, Best Practices with Sample Code for Pr
 ### Getting Started Right
 - Start your Jupyter server with ```supervisor``` or ```tmux``` instead of direct ```ssh``` or ```bash```. This works out to be more stable Jupyter server which doesn't die unexpectedly. Consider writing the buffer logs to a file rather than stdout
     - This is specially useful when working inside _Docker_ using `docker attach` where you might not see a lot of logs
-- Consider using a ssh client like MobaXterm [Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
+- Consider using a ssh client like [MobaXterm Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
 - Refer our [How to Tunnel using SSH](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) (with illustrations) to tunnel to a remote Jupyter notebook
 
 # Debugging 
@@ -102,6 +102,8 @@ draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each chara
 
 # Programming Sugar
 - _Cool Feature_: Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```!pwd``` to check your current working directory
+    - You can `cd {PATH}` where PATH is a Python variable, similarly you can do `PATH = !pwd` to use relative paths instead of absolute
+    - Both `pwd` and `!pwd` work with mild preference for `!pwd` to signal other code readers that this is a shell command
 - Running jupyter from an environment does NOT mean that the shell environment in `!` will have the same environment variables
     - Running `!pip install foo` (or `conda install bar`) will use the `pip` which is in the path for the `sh` shell which might be different from whatever `bash` shell environment you use
 - If you want to install a package while inside Jupyter and `!pip install foo` doesn't seem to do it, try:
@@ -110,10 +112,29 @@ draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each chara
 import sys
 !{sys.executable} -m pip install foo  # sys.executable points to the python that is running in your kernel 
 ```
-- If your imports are failing, check your notebook kernel on the right top in gray
 
 ## Related Tips
+- If your imports are failing, check your notebook kernel on the right top in gray
 - Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
+- Viewing function docstrings: 
+    - If in a cell after writing a function you hit `shift + tab`, it will display function's docstring in a tooltip, and it has options to expand the tooltip or expand it at the bottom of the screen    
+    - Use `?func_name()` to view function, class docstrings etc. For example:
+
+    ```python-traceback
+    ?str.replace() 
+    ```
+
+    Returns:
+    ```python-traceback
+    Docstring:
+    S.replace(old, new[, count]) -> str
+
+    Return a copy of S with all occurrences of substring
+    old replaced by new.  If the optional argument count is
+    given, only the first count occurrences are replaced.
+    Type:      method_descriptor
+    ```
+    
 - Press ```h``` to view keyboard shortcuts
 - The cell type can be changed to markdown and plain text too
     - Some people convert code cells to markdown if you want to execute them but don't want to comment either
