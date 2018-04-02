@@ -61,6 +61,44 @@ Out[6]: 43
 ```
 - When using `print(out_var)` on a nested list or dictionary, consider doing `print(json.dumps(out_var, indent=2))` instead. It will _pretty print_ the output string. 
 
+# Programming Sugar
+- _Cool Feature_: Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```!pwd``` to check your current working directory
+    - You can `cd {PATH}` where PATH is a Python variable, similarly you can do `PATH = !pwd` to use relative paths instead of absolute
+    - Both `pwd` and `!pwd` work with mild preference for `!pwd` to signal other code readers that this is a shell command
+- Running jupyter from an environment does NOT mean that the shell environment in `!` will have the same environment variables
+    - Running `!pip install foo` (or `conda install bar`) will use the `pip` which is in the path for the `sh` shell which might be different from whatever `bash` shell environment you use
+- If you want to install a package while inside Jupyter and `!pip install foo` doesn't seem to do it, try:
+
+```python
+import sys
+!{sys.executable} -m pip install foo  # sys.executable points to the python that is running in your kernel 
+```
+- Shell commands are nice, but we *discourage* their use - makes it difficult to refactor to script later. For instance `cd ../../` in jupyter could be done using `os.setcwd()`as well
+
+## Jupyter Kungfu
+
+- If in a cell after writing a function you hit `shift + tab`, it will display function's docstring in a tooltip, and it has options to expand the tooltip or expand it at the bottom of the screen    
+- Use `?func_name()` to view function, class docstrings etc. For example:
+
+```python-traceback
+?str.replace() 
+```
+
+Returns:
+```python-traceback
+Docstring:
+S.replace(old, new[, count]) -> str
+
+Return a copy of S with all occurrences of substring
+old replaced by new.  If the optional argument count is
+given, only the first count occurrences are replaced.
+Type:      method_descriptor
+```
+
+- List all the variables/functions in a module: `module_name.*?`. For instance: `pd.*?`. Additionally, this works with prefixes: `pd.read_*?` and `pd.*_csv?` will also work
+- Show the docstring+code for a function/class using : `pd.read_csv??`    
+- Press ```h``` to view keyboard shortcuts
+
 # Better Mindset
 - **IMPORTANT**: Frequently rewrite each cell logic into functions. These functions can be moved to separate ```.py``` files on regular intervals. Your notebook run should be mainly function calls. 
     - This would prevent your notebook from becoming a giant pudding of several global variables
@@ -100,42 +138,9 @@ ax = show_img(char_bg_mask, ax=axes.flat[1], title = 'Bkg_mask:\n'+str(char_bg_m
 draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each character
 ```
 
-# Programming Sugar
-- _Cool Feature_: Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```!pwd``` to check your current working directory
-    - You can `cd {PATH}` where PATH is a Python variable, similarly you can do `PATH = !pwd` to use relative paths instead of absolute
-    - Both `pwd` and `!pwd` work with mild preference for `!pwd` to signal other code readers that this is a shell command
-- Running jupyter from an environment does NOT mean that the shell environment in `!` will have the same environment variables
-    - Running `!pip install foo` (or `conda install bar`) will use the `pip` which is in the path for the `sh` shell which might be different from whatever `bash` shell environment you use
-- If you want to install a package while inside Jupyter and `!pip install foo` doesn't seem to do it, try:
-
-```python
-import sys
-!{sys.executable} -m pip install foo  # sys.executable points to the python that is running in your kernel 
-```
-
-## Related Tips
+### General Tips
 - If your imports are failing, check your notebook kernel on the right top in gray
 - Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
-- Viewing function docstrings: 
-    - If in a cell after writing a function you hit `shift + tab`, it will display function's docstring in a tooltip, and it has options to expand the tooltip or expand it at the bottom of the screen    
-    - Use `?func_name()` to view function, class docstrings etc. For example:
-
-    ```python-traceback
-    ?str.replace() 
-    ```
-
-    Returns:
-    ```python-traceback
-    Docstring:
-    S.replace(old, new[, count]) -> str
-
-    Return a copy of S with all occurrences of substring
-    old replaced by new.  If the optional argument count is
-    given, only the first count occurrences are replaced.
-    Type:      method_descriptor
-    ```
-    
-- Press ```h``` to view keyboard shortcuts
 - The cell type can be changed to markdown and plain text too
     - Some people convert code cells to markdown if you don't want to execute them but don't want to comment either
 - Consider downloading a notebook as a Python file and then push to Gitlab for code review
@@ -143,3 +148,8 @@ import sys
 ### Please don't overdo Cell Magic
 - Don't use alias and alias_magic unless extremely helpful. Aliases make your code difficult to read for other developers
 - Don't leave ```%%timeit``` in your code. Why? Because it does 1,00,000 runs of the cell and then return average of best 3 runtimes. This is not always needed. Instead use ```%%time``` or add average times in inline comments
+
+# With Inputs from 
+- Abdul Qadir
+- [Anuj Khare](https://www.linkedin.com/in/anuj-khare-72942498/)
+- Harsh Gupta
