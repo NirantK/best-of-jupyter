@@ -62,9 +62,10 @@ Out[6]: 43
 - When using `print(out_var)` on a nested list or dictionary, consider doing `print(json.dumps(out_var, indent=2))` instead. It will _pretty print_ the output string. 
 
 # Programming Sugar
-- _Cool Feature_: Execute a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```!pwd``` to check your current working directory
+- Executing a shell command from inside your notebook. You can use this to check what files are in available in your working folder```!ls *.csv``` or even ```!pwd``` to check your current working directory
     - You can `cd {PATH}` where PATH is a Python variable, similarly you can do `PATH = !pwd` to use relative paths instead of absolute
     - Both `pwd` and `!pwd` work with mild preference for `!pwd` to signal other code readers that this is a shell command
+    - Shell commands are nice, but we *discourage* their use - makes it difficult to refactor to script later. For instance `cd ../../` in Jupyter could be done using `os.setcwd()`as well
 - Running jupyter from an environment does NOT mean that the shell environment in `!` will have the same environment variables
     - Running `!pip install foo` (or `conda install bar`) will use the `pip` which is in the path for the `sh` shell which might be different from whatever `bash` shell environment you use
 - If you want to install a package while inside Jupyter and `!pip install foo` doesn't seem to do it, try:
@@ -73,7 +74,6 @@ Out[6]: 43
 import sys
 !{sys.executable} -m pip install foo  # sys.executable points to the python that is running in your kernel 
 ```
-- Shell commands are nice, but we *discourage* their use - makes it difficult to refactor to script later. For instance `cd ../../` in jupyter could be done using `os.setcwd()`as well
 
 ## Jupyter Kungfu
 
