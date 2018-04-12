@@ -75,6 +75,22 @@ import sys
 !{sys.executable} -m pip install foo  # sys.executable points to the python that is running in your kernel 
 ```
 
+## Search Magic
+Use the [Search Magic](https://github.com/cardwizard/JupyterSearch/blob/master/search_magic.py) file - no need to pip install. Download and use the file. 
+
+```python
+In [1]: from search_magic import SearchMagic
+In [2]: get_ipython().register_magics(SearchMagic)
+
+In [3]: %create_index
+```
+```javascript
+In [4]: %search tesseract
+Out[4]: Cell Number -> 2
+        Notebook -> similarity.ipynb
+        Notebook Execution Number -> 2
+```
+
 ## Jupyter Kungfu
 
 - If in a cell after writing a function you hit `shift + tab`, it will display function's docstring in a tooltip, and it has options to expand the tooltip or expand it at the bottom of the screen    
