@@ -2,11 +2,21 @@
 Making the best of Jupyter: Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 ---
 
+### Contents
+* [Getting Started Right](#getting-started-right)
+* [Debugging](#debugging) - IPython debugger and `set_trace()`
+* [Programming Sugar](#programming-sugar) - using shell commands with Python from within notebook and other hacks
+    * [Search Magic](#search-magic) - search across several notebooks for a code snippet
+* [Jupyter Kungfu](#jupyter-kungfu) - jupyter specific tips such as looking up docs in several ways
+* [Better Mindset](#better-mindset) - covers broader Python recommendations
+* [Plotting and Visualization Tips](#plotting-and-visualization)
+
+
 ### Getting Started Right
 - Start your Jupyter server with ```supervisor``` or ```tmux``` instead of direct ```ssh``` or ```bash```. This works out to be more stable Jupyter server which doesn't die unexpectedly. Consider writing the buffer logs to a file rather than stdout
     - This is specially useful when working inside _Docker_ using `docker attach` where you might not see a lot of logs
 - Consider using a ssh client like [MobaXterm Personal Portable Edition](https://download.mobatek.net/10520180106182002/MobaXterm_Portable_v10.5.zip) with multiple tabbed ssh client options
-- Refer our [How to Tunnel using SSH](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) (with illustrations) to tunnel to a remote Jupyter notebook
+- Refer [How to Tunnel using SSH](https://github.com/NirantK/best-of-jupyter/blob/master/TUNNELING.md) (with illustrations) to tunnel to a remote Jupyter notebook
 
 # Debugging 
 - When you see an error, you can run [```%debug```](http://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-debug) in a new cell to activate IPython Debugger. Standard keyboard shortcuts such as ```c``` for continue, ```n``` for next, ```q``` for quit apply
@@ -33,7 +43,7 @@ Returns:
       6     set_trace() #this one triggers the debugger
 ----> 7     return y
       8 
-      9 fobar(3)
+      9 foobar(3)
 
 ipdb> q
 Exiting Debugger.
