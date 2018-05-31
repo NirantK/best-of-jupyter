@@ -140,6 +140,7 @@ Type:      method_descriptor
 
 ```python
 def show_img(im, figsize=None, ax=None, title=None):
+    import matplotlib.pyplot as plt
     if not ax: fig,ax = plt.subplots(figsize=figsize)
     ax.imshow(im, cmap='gray')
     if title is not None: ax.set_title(title)
@@ -148,6 +149,7 @@ def show_img(im, figsize=None, ax=None, title=None):
     return ax
     
 def draw_rect(ax, bbox):
+    import matplotlib.patches as patches
     x, y, w, h = bbox
     patch = ax.add_patch(patches.Rectangle((x, y), w,h, fill=False, edgecolor='red', lw=2))
 ```
