@@ -176,8 +176,3 @@ draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each chara
 ### Please don't overdo Cell Magic
 - Don't use alias and alias_magic unless extremely helpful. Aliases make your code difficult to read for other developers
 - Don't leave ```%%timeit``` in your code. Why? Because it does 1,00,000 runs of the cell and then return average of best 3 runtimes. This is not always needed. Instead use ```%%time``` or add average times in inline comments
-
-# With Inputs from 
-- Abdul Qadir
-- [Anuj Khare](https://www.linkedin.com/in/anuj-khare-72942498/)
-- Harsh Gupta
