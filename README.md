@@ -1,6 +1,12 @@
 # Making the Best of Jupyter
-Making the best of Jupyter: Tips, Tricks, Best Practices with Sample Code for Productivity Boost
+
+Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 ---
+Found useful by Nobel Laurates and more:
+
+> # "..., this looks very helpful"
+>
+> - Economics Nobel Laurate 2018, Dr. Paul Romer [on Twitter](https://twitter.com/paulmromer/status/985518009879089152)
 
 ### Contents
 * [Getting Started Right](#getting-started-right)
