@@ -8,6 +8,11 @@ Making the best of Jupyter: Tips, Tricks, Best Practices with Sample Code for Pr
 * [Programming Sugar](#programming-sugar) - using shell commands with Python from within notebook and other hacks
     * [Search Magic](#search-magic) - search across several notebooks for a code snippet
 * [Jupyter Kungfu](#jupyter-kungfu) - jupyter specific tips such as looking up docs in several ways
+   * [Sanity Checks](#sanity-checks)
+   * :star: [nbdime](#nbdime) - Better `git diff` for Jupyter
+   * [Markdown Printing](#markdown-printing) - Use formatted Markdown in your print statements 
+   * [Skip Cell Execution](#skip-cell-execution) - Jupyter magic to mark code as work in progress
+   * [Find currently running cell](#find-currently-running-cell) - javascript snippet which adds a keyboard shortcut to find currently executing cell
 * [Better Mindset](#better-mindset) - covers broader Python recommendations
 * [Plotting and Visualization Tips](#plotting-and-visualization)
 
@@ -101,7 +106,7 @@ Out[4]: Cell Number -> 2
         Notebook Execution Number -> 2
 ```
 
-## Jupyter Kungfu
+# Jupyter Kungfu
 
 - If in a cell after writing a function you hit `shift + tab`, it will display function's docstring in a tooltip, and it has options to expand the tooltip or expand it at the bottom of the screen    
 - Use `?func_name()` to view function, class docstrings etc. For example:
@@ -124,6 +129,115 @@ Type:      method_descriptor
 - List all the variables/functions in a module: `module_name.*?`. For instance: `pd.*?`. Additionally, this works with prefixes: `pd.read_*?` and `pd.*_csv?` will also work
 - Show the docstring+code for a function/class using : `pd.read_csv??`    
 - Press ```h``` to view keyboard shortcuts
+
+
+## Sanity Checks
+
+- If your imports are failing, check your notebook kernel on the right top in gray
+- Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
+- The cell type can be changed to markdown and plain text too
+    - Some people convert code cells to markdown if you don't want to execute them but don't want to comment either
+- Consider downloading a notebook as a Python file and then push to Github for code review or use [nbdime](https://nbdime.readthedocs.io/en/stable/)
+
+
+## [nbdime](https://nbdime.readthedocs.io/en/stable/)
+
+Selective Diff/Merge Tool for jupyter notebooks
+
+Install it first:
+
+```bash
+pip install -e git+https://github.com/jupyter/nbdime#egg=nbdime
+```
+It should automatically configure it for jupyter notebook. If something doesn’t work, see [installation](https://nbdime.readthedocs.io/en/latest/installing.html).
+
+Then put the following into `~/.jupyter/nbdime_config.json`:
+
+```javascript
+{
+
+  "Extension": {
+    "source": true,
+    "details": false,
+    "outputs": false,
+    "metadata": false
+  },
+
+  "NbDiff": {
+    "source": true,
+    "details": false,
+    "outputs": false,
+    "metadata": false
+  },
+
+  "NbDiffDriver": {
+    "source": true,
+    "details": false,
+    "outputs": false,
+    "metadata": false
+  },
+
+  "NbMergeDriver": {
+    "source": true,
+    "details": false,
+    "outputs": false,
+    "metadata": false
+  },
+
+  "dummy": {}
+}
+```
+
+Change outputs value to true if you care to see outputs diffs too.
+
+## Markdown Printing
+Including markdown in your code’s output is very useful. Use this to highlight parameters, performance notes and so on. 
+This enables colors, Bold, etc.
+
+```python
+from IPython.display import Markdown, display
+def printmd(string, color=None):
+    colorstr = "<span style='color:{}'>{}</span>".format(color, string)
+    display(Markdown(colorstr))
+
+printmd("**bold and blue**", color="blue")
+```
+
+## Skip Cell Execution
+To Skip A Cell From Running e.g. mark it as work in progress
+
+Add at the top of the cell:
+
+```
+%%script false
+
+some multiline code that you want to skip for a time being 
+(e.g. work in progress) 
+without commenting out / deleting cell 
+goes here
+```
+
+## Find currently running cell
+
+Add this snippet to the start of your notebook. Press `Alt+I` to find the cell being executed right now. This does not work if you have enabled vim bindings:
+
+```javascript
+%%javascript
+// Go to Running cell shortcut
+Jupyter.keyboard_manager.command_shortcuts.add_shortcut('Alt-I', {
+    help : 'Go to Running cell',
+    help_index : 'zz',
+    handler : function (event) {
+        setTimeout(function() {
+            // Find running cell and click the first one
+            if ($('.running').length > 0) {
+                //alert("found running cell");
+                $('.running')[0].scrollIntoView();
+            }}, 250);
+        return false;
+    }
+});
+```
 
 # Better Mindset
 - **IMPORTANT**: Frequently rewrite each cell logic into functions. These functions can be moved to separate ```.py``` files on regular intervals. Your notebook run should be mainly function calls. 
@@ -165,13 +279,6 @@ ax = show_img(char_bg_mask, ax=axes.flat[1], title = 'Bkg_mask:\n'+str(char_bg_m
 #  If you are working on image segmentation task, you can easily add red rectangles per subplot:
 draw_rect(ax, char_bounding_boxes)  # will add red bounding boxes for each character
 ```
-
-### General Tips
-- If your imports are failing, check your notebook kernel on the right top in gray
-- Consider using ```conda``` for instead of ```pip virtualenv``` similar because that ensures package versions are consistent. `conda` is not a Python package manager. Check [conda (vs pip): Myths and Misconceptions](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/) from the creator of Pandas
-- The cell type can be changed to markdown and plain text too
-    - Some people convert code cells to markdown if you don't want to execute them but don't want to comment either
-- Consider downloading a notebook as a Python file and then push to Gitlab for code review
 
 ### Please don't overdo Cell Magic
 - Don't use alias and alias_magic unless extremely helpful. Aliases make your code difficult to read for other developers
