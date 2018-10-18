@@ -17,7 +17,6 @@ Found useful by Nobel Laurates and more:
    * [Sanity Checks](#sanity-checks)
    * :star: [nbdime](#nbdime) - Better `git diff` for Jupyter
    * [Markdown Printing](#markdown-printing) - Use formatted Markdown in your print statements 
-   * [Skip Cell Execution](#skip-cell-execution) - Jupyter magic to mark code as work in progress
    * [Find currently running cell](#find-currently-running-cell) - javascript snippet which adds a keyboard shortcut to find currently executing cell
 * [Better Mindset](#better-mindset) - covers broader Python recommendations
 * [Plotting and Visualization Tips](#plotting-and-visualization)
@@ -207,20 +206,6 @@ def printmd(string, color=None):
     display(Markdown(colorstr))
 
 printmd("**bold and blue**", color="blue")
-```
-
-## Skip Cell Execution
-To Skip A Cell From Running e.g. mark it as work in progress
-
-Add at the top of the cell:
-
-```
-%%script false
-
-some multiline code that you want to skip for a time being 
-(e.g. work in progress) 
-without commenting out / deleting cell 
-goes here
 ```
 
 ## Find currently running cell
