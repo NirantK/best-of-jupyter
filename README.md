@@ -2,11 +2,11 @@
 
 Tips, Tricks, Best Practices with Sample Code for Productivity Boost
 ---
-Found useful by Nobel Laurates and more:
+Found useful by Nobel Laureates and more:
 
 > # "..., this looks very helpful"
 >
-> - Economics Nobel Laurate 2018, Dr. Paul Romer [on Twitter](https://twitter.com/paulmromer/status/985518009879089152)
+> - Economics Nobel Laureate 2018, Dr. Paul Romer [on Twitter](https://twitter.com/paulmromer/status/985518009879089152)
 
 ### Contents
 * [Getting Started Right](#getting-started-right)
